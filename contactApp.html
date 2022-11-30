@@ -23,8 +23,8 @@
                </ul>
                <form class="d-flex" role="search">
                   <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button id="filter-btn" class="btn btn-outline-success" type="submit">Filter</button>
-                  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#InputPhone">Add</button>
+                  <button id="filter-btn" class="btn btn-outline-success" type="button">Filter</button>
+                  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#InputContact">Add</button>
                </form>
             </div>
          </div>
@@ -32,108 +32,99 @@
       <hr>
       <div class="jumbotron">
          <div class="container results">
-          <div id="searchresults"></div>
+            <div id="searchresults"></div>
          </div>
       </div>
-      
       <!-- Add Modal -->
-<div class="modal fade" id="InputContact" tabindex="-1" aria-labelledby="InputContact" aria-hidden="true">
-    <div class="modal-dialog d-flex justify-content-center">
-        <div class="modal-content w-75">
-            <div class="modal-header">
-                <h5 class="modal-title" id="Add Labal">Add a contact</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal fade" id="InputContact" tabindex="-1" aria-labelledby="InputContact" aria-hidden="true">
+         <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="AddContact">Add a contact</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body p-4">
+                  <form>
+                     <!-- First input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="addfirst" class="form-control">
+                        <label class="form-label" for="addfirst">First Name</label>
+                     </div>
+                     <!-- Last input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="addlast" class="form-control">
+                        <label class="form-label" for="addlast">Last Name</label>
+                     </div>
+                     <!-- Phone input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="addphone" class="form-control">
+                        <label class="form-label" for="addphone">Phone Number</label>
+                     </div>
+                     <!-- Type dropdown -->
+                     <div class="btn-group mb-2">
+                        <button id="addtype" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Contact Type
+                        </button>
+                        <ul class="dropdown-menu">
+                           <li><a class="dropdown-item" href="#">Friend</a></li>
+                           <li><a class="dropdown-item" href="#">Business</a></li>
+                           <li><a class="dropdown-item" href="#">Family</a></li>
+                           <li><a class="dropdown-item"  href="#">Other</a></li>
+                        </ul>
+                     </div>
+                     <br>
+                     <!-- Submit button -->
+                     <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" onclick="addContact()">Save</button>
+                  </form>
+               </div>
             </div>
-            <div class="modal-body p-4">
-                <form>
-                    <!-- First input -->
-                    <div class="form-outline mb-1">
-                        <input type="text" id="addfirst" class="form-control" />
-                        <label class="form-label" for="name4">First Name</label>
-                    </div>
-
-                    <!-- Last input -->
-                    <div class="form-outline mb-1">
-                        <input type="text" id="addlast" class="form-control" />
-                        <label class="form-label" for="name4">Last Name</label>
-                    </div>
-                    
-                    <!-- Phone input -->
-                    <div class="form-outline mb-1">
-                        <input type="text" id="addphone" class="form-control" />
-                        <label class="form-label" for="email4">Phone Number</label>
-                    </div>
-
-				<!-- Type dropdown -->
-                  <div class="btn-group mb-2">
-                     <button id="addtype" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                     Contact Type
-                     </button>
-                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Friend</a></li>
-                        <li><a class="dropdown-item" href="#">Business</a></li>
-                        <li><a class="dropdown-item" href="#">Family</a></li>
-                        <li><a class="dropdown-item"  href="#">Other</a></li>
-                     </ul>
-                  </div><br>
-
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" onclick="addContact()">Save</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+         </div>
+      </div>
       <!-- Edit Modal -->
-<div class="modal fade" id="editContact" tabindex="-1" aria-labelledby="editContact" aria-hidden="true">
-    <div class="modal-dialog d-flex justify-content-center">
-        <div class="modal-content w-75">
-            <div class="modal-header">
-                <h5 class="modal-title" id="Add Labal">Edit a contact</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal fade" id="editContact" tabindex="-1" aria-labelledby="editContact" aria-hidden="true">
+         <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="EditContact">Edit a contact</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body p-4">
+                  <form>
+                     <!-- First input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="editfirst" class="form-control">
+                        <label class="form-label" for="editfirst">First Name</label>
+                     </div>
+                     <!-- Last input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="editlast" class="form-control">
+                        <label class="form-label" for="editlast">Last Name</label>
+                     </div>
+                     <!-- Phone input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="editphone" class="form-control">
+                        <label class="form-label" for="editphone">Phone Number</label>
+                     </div>
+                     <!-- Type dropdown -->
+                     <div class="btn-group mb-2">
+                        <button id="edittype" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Contact Type
+                        </button>
+                        <ul class="dropdown-menu">
+                           <li><a class="dropdown-item" href="#">Friend</a></li>
+                           <li><a class="dropdown-item" href="#">Business</a></li>
+                           <li><a class="dropdown-item" href="#">Family</a></li>
+                           <li><a class="dropdown-item"  href="#">Other</a></li>
+                        </ul>
+                     </div>
+                     <br>
+                     <!-- Submit button -->
+                     <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" onclick="updateContact()">Save</button>
+                  </form>
+               </div>
             </div>
-            <div class="modal-body p-4">
-                <form>
-                    <!-- First input -->
-                    <div class="form-outline mb-1">
-                        <input type="text" id="editfirst" class="form-control" />
-                        <label class="form-label" for="name4">First Name</label>
-                    </div>
-
-                    <!-- Last input -->
-                    <div class="form-outline mb-1">
-                        <input type="text" id="editlast" class="form-control" />
-                        <label class="form-label" for="name4">Last Name</label>
-                    </div>
-                    
-                    <!-- Phone input -->
-                    <div class="form-outline mb-1">
-                        <input type="text" id="editphone" class="form-control" />
-                        <label class="form-label" for="email4">Phone Number</label>
-                    </div>
-
-				<!-- Type dropdown -->
-                  <div class="btn-group mb-2">
-                     <button id="edittype" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                     Contact Type
-                     </button>
-                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Friend</a></li>
-                        <li><a class="dropdown-item" href="#">Business</a></li>
-                        <li><a class="dropdown-item" href="#">Family</a></li>
-                        <li><a class="dropdown-item"  href="#">Other</a></li>
-                     </ul>
-                  </div><br>
-
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" onclick="updateContact()">Save</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+         </div>
+      </div>
       <!-- jQuery first, then sweetalert2, then Bootstrap JS, then our js -->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>

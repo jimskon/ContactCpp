@@ -40,14 +40,22 @@ int main() {
     	res.set_header("Access-Control-Allow-Origin","*");
     	res.set_content("Contact API", "text/plain");
   	});
-  	
+
+  	svr.Get(R"(/contact/find)", [&](const httplib::Request& req, httplib::Response& res) {
+    	res.set_header("Access-Control-Allow-Origin","*");
+
+    	results = ctdb.find("");
+    	string json = jsonResults(results);
+    	res.set_content(json, "text/json");
+    	res.status = 200;
+  	});
+  	  	
   	svr.Get(R"(/contact/find/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
     	res.set_header("Access-Control-Allow-Origin","*");
 
     	string last = req.matches[1];
     	results = ctdb.find(last);
     	string json = jsonResults(results);
-    	cout << "Last: " << json << endl;
     	res.set_content(json, "text/json");
     	res.status = 200;
   	});

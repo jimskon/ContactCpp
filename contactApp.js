@@ -47,10 +47,12 @@ function displayMatches(results) {
 }
 
 function findMatches(search) {
-    if (search == "") search = " ";
+	// only include / after find if search not empty
+	search = search.trim();
+    if (search != "") search = "/" + search;
 
 	console.log("Search:" + search);
-    fetch(baseUrl + '/contact/find/' + search, {
+    fetch(baseUrl + '/contact/find' + search, {
             method: 'get'
         })
         .then(response => response.json())
